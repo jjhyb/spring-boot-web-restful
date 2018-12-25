@@ -1,7 +1,9 @@
 package com.yibo.springbootwebrestful.controller;
 
+import com.yibo.springbootwebrestful.exception.NotExistException;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 /**
@@ -19,7 +21,10 @@ public class HelloController {
      */
     @GetMapping("/hello")
     @ResponseBody
-    public String hello(){
+    public String hello(@RequestParam("userName") String userName){
+        if("aaa".equals(userName)){
+            throw new NotExistException("用户名不存在");
+        }
         return "Hello World";
     }
 
